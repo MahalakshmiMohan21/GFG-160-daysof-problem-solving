@@ -1,0 +1,54 @@
+class Solution {
+    // Function to check if two strings are rotations of each other or not.
+    public static boolean areRotations(String s1, String s2) {
+        // Your code here
+      if(s1.length()!=s2.length()){
+          return false;
+      }
+        String a=s1+s1;
+        return kmp(s2,a);
+    }
+    private static  boolean kmp(String p,String t){
+        int m=p.length();
+        int n=t.length();
+        int lps[]=lpsarr(p);
+        int i=0;
+        int j=0;
+        while(i<n){
+            if(p.charAt(j)==t.charAt(i)){
+                i++;
+                j++;
+            }
+            if(j==m){
+                return true;
+            }
+            else if(i<n&&p.charAt(j)!=t.charAt(i)){
+                if(j!=0){
+                    j=lps[j-1];
+                }else{
+                i++;
+                }
+            }
+        }
+        return false;
+    }
+    private static int[] lpsarr(String p){
+        int m=p.length();
+        int lps[]=new int[m];
+        int len=0;
+        int i=1;
+        while(i<m){
+            if(p.charAt(i)==p.charAt(len)){
+                len++;
+                lps[i]=len;
+                i++;
+            }else if(len!=0){
+                len=lps[len-1];
+            }else{
+                lps[i]=0;
+                i++;
+            }
+        }
+        return lps;
+    }
+}
