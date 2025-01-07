@@ -1,0 +1,43 @@
+class Solution {
+    // Function to count inversions in the array.
+    static int inversionCount(int arr[]) {
+        // Your Code Here
+        int t[]=new int[arr.length];
+        return met(arr,t,0,arr.length-1);
+    }
+    private static int merge(int arr[],int t[],int l,int m,int r){
+        int i=l;
+        int j=m+1;
+        int k=l;
+        int count=0;
+        while(i<=m&&j<=r){
+            if(arr[i]<=arr[j]){
+                t[k++]=arr[i++];
+            }else{
+                t[k++]=arr[j++];
+                count+=(m-i+1);
+            }
+        }
+        while(i<=m){
+            t[k++]=arr[i++];
+        }
+        while(j<=r){
+            t[k++]=arr[j++];
+        }
+        for(i=l;i<=r;i++){
+            arr[i]=t[i];
+        }
+        return count;
+    }
+    static int met(int arr[],int t[],int l,int r){
+        int count=0;
+        if(l<r){
+        int m=(l+r)/2;
+        count+=met(arr,t,l,m);
+        count+=met(arr,t,m+1,r);
+        count+=merge(arr,t,l,m,r);
+        }
+        return count;
+    }
+    
+}
