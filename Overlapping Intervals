@@ -1,0 +1,29 @@
+class Solution {
+    public List<int[]> mergeOverlap(int[][] arr) {
+        // Code here // Code here
+        if(arr.length<=1){
+            return Arrays.asList(arr);
+        }
+        Arrays.sort(arr,(a,b)-> Integer.compare(a[0],b[0]));
+        
+        List<int[]>merge=new ArrayList<>();
+        int[] cur=arr[0];
+        merge.add(cur);
+        
+        for(int[] i:arr){
+            int cs=cur[0];
+            int ce=cur[1];
+            int ns=i[0];
+            int ne=i[1];
+            
+            if(ce>=ns){
+                cur[1]=Math.max(ce,ne);
+            }else{
+                cur=i;
+                merge.add(cur);
+                
+            }
+        }
+        return merge;
+    }
+}
