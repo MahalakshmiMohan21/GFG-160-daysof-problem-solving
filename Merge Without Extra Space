@@ -1,0 +1,21 @@
+class Solution {
+    // Function to merge the arrays.
+    public void mergeArrays(int a[], int b[]) {
+        // code here
+        int x=a.length;
+        int y=b.length;
+        int i=x-1;
+        int j=0;
+        while(i>=0&&j<y){
+        if(a[i]>b[j]){
+            int t=a[i];
+            a[i]=b[j];
+            b[j]=t;
+        }
+        i--;
+        j++;
+    }
+        Arrays.sort(a);
+        Arrays.sort(b);
+    }
+}
