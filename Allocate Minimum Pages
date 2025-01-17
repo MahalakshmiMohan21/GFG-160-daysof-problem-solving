@@ -1,0 +1,56 @@
+class Solution {
+    public static int findPages(int[] arr, int k) {
+        // code here
+        int n=arr.length;
+        if(n<k){
+            return -1;
+        }
+        int l=max(arr);
+        int h=sum(arr);
+        int res=-1;
+        while(l<=h){
+            int mid=l+(h-l)/2;
+            if(poss( arr, n, k, mid)){
+                res=mid;
+                h=mid-1;
+            }else{
+                l=mid+1;
+            }
+        }
+        return res;
+    }
+    
+    private static boolean poss(int[] arr,int n,int k,int mm){
+        int count=1;
+        int csum=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]>mm){
+                return false;
+            }
+            if(csum+arr[i]>mm){
+                count++;
+                csum=arr[i];
+                if(count>k){
+                    return false;
+                }
+            }else{
+                csum+=arr[i];
+            }
+        }
+        return true;
+    }
+    private static int max(int[] arr){
+        int max=Integer.MIN_VALUE;
+        for(int i:arr){
+            max=Math.max(max,i);
+        }
+        return max;
+    }
+    private static int sum(int arr[]){
+        int sum=0;
+        for(int i:arr){
+            sum+=i;
+        }
+        return sum;
+    }
+}
