@@ -1,0 +1,33 @@
+class Solution {
+    public static int aggressiveCows(int[] stalls, int k) {
+        // code here
+        Arrays.sort(stalls);
+        int l=1;
+        int h=stalls[stalls.length-1]-stalls[0];
+        int res=0;
+        while(l<=h){
+            int m=l+(h-l)/2;
+            if(met(stalls,k,m)){
+                res=m;
+                l=m+1;
+            }else{
+                h=m-1;
+            }
+        }
+        return res;
+    }
+    private static boolean met(int[] stalls,int k,int min){
+        int count=1;
+        int last=stalls[0];
+        for(int i=1;i<stalls.length;i++){
+            if(stalls[i]-last>=min){
+                count++;
+                last=stalls[i];
+                if(count==k){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
