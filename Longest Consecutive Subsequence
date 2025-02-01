@@ -1,6 +1,6 @@
 class Solution {
 
-    // Function to return length of longest subsequence of consecutive integers.
+   
     public int longestConsecutive(int[] arr) {
         // code here
       HashSet<Integer>a=new HashSet<>();
