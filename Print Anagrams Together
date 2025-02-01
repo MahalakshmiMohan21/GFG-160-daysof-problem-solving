@@ -1,0 +1,31 @@
+class Solution {
+    public ArrayList<ArrayList<String>> anagrams(String[] arr) {
+        // code here
+        ArrayList<ArrayList<String>> res=new ArrayList<>();
+        boolean v[]=new boolean[arr.length];
+        for(int i=0;i<arr.length;i++){
+            if(!v[i]){
+                ArrayList<String> ans=new ArrayList<>();
+                ans.add(arr[i]);
+                v[i]=true;
+            
+            for(int j=i+1;j<arr.length;j++){
+                if(!v[j]&& anag(arr[i],arr[j])){
+                    ans.add(arr[j]);
+                    v[j]=true;
+                }
+             }
+            
+        res.add(ans);
+            }
+    }
+    return res;
+    }
+    private static boolean anag(String s1,String s2){
+        char s3[]=s1.toCharArray();
+        char s4[]=s2.toCharArray();
+        Arrays.sort(s3);
+        Arrays.sort(s4);
+        return Arrays.equals(s3,s4);
+    }
+}
