@@ -1,0 +1,47 @@
+class Solution {
+    public int countTriplets(int[] arr, int target) {
+        // Code Here
+       
+        int n=arr.length;
+        int c=0;
+        for(int i=0;i<n-2;i++){
+            
+            int l=i+1;
+            int r=n-1;
+           
+            while(l<r){
+                int sum=arr[i]+arr[l]+arr[r];
+                
+                if(sum==target){
+                    if(arr[l]==arr[r]){
+                        int dup=r-l+1;
+                        c+=dup*(dup-1)/2;
+                        break;
+                    }else{
+                    int c1=1;
+                    int c2=1;
+                    
+                    
+                    while(l+1<r&&arr[l]==arr[l+1]){
+                        c1++;
+                        l++;
+                    }
+                    while(r-1>l&&arr[r]==arr[r-1]){
+                        c2++;
+                         r--;
+                    }
+                    
+                   c+=c1*c2;
+                    l++;
+                    r--;
+                    }
+                }else if(sum<target){
+                    l++;
+                }else{
+                    r--;
+                }
+            }
+        }
+        return c;
+    }
+}
