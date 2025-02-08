@@ -1,0 +1,16 @@
+class Solution {
+
+    int countPairs(int arr[], int target) {
+        // Complete the function
+       HashMap<Integer,Integer>res=new HashMap<>();
+       int c=0;
+       for(int num:arr){
+           int dif=target-num;
+           if(res.containsKey(dif)){
+               c+=res.get(dif);
+           }
+           res.put(num,res.getOrDefault(num,0)+1);
+       }
+        return c;
+    }
+}
